@@ -1,0 +1,50 @@
+
+2........
+configure web server
+
+clone git file
+
+install http-alias packages. 
+If its get installed then only restart the httpd service or
+if the package is already installed dont start the httpd service
+
+Answer:
+=================
+
+
+	#git clone <git url>
+	#cd web_install
+	#vim apache-setup.yml
+  
+  
+---
+- name: example answer 
+  hosts: node1.lab.example.com
+  become: true
+  remote_user: devops
+  tasks:
+    - name: install httpd alias packages
+      yum:
+        name: httpd-tools
+        state: latest.
+      
+    - name: Generate a basic homepage from jinja2 template
+      copy:
+        src: alias.conf
+        dest: /var/www/html/index.html
+        force: yes
+      notify: start the apache web server
+
+  handlers:
+
+    - name: Start the apache web server
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
+        
+=======================================================================================        
+ #ansible-playbook apache-setup.yml
+ #git add .
+ #git commit -m 'commit name'
+ #git push
