@@ -1,5 +1,6 @@
 
-2........
+Scenario -1
+-----------------
 configure web server
 
 clone git file https://github.com/rohitmeachu312/ex447-3.handlers.git
@@ -7,6 +8,12 @@ clone git file https://github.com/rohitmeachu312/ex447-3.handlers.git
 install http-alias packages. 
 If its get installed then only restart the httpd service or
 if the package is already installed dont start the httpd service
+
+Scenario-2
+------------------
+- clone the Git Repository  https://github.com/rohitmeachu312/ex447-3.handlers.git
+- update the repository 
+- when  file update the system state then httpd should  restart 
 
 Answer:
 =================
@@ -16,8 +23,9 @@ cd ex447-3.handlers.git/
 
 
 
-
-vim playbook.yml
+Scenario-1
+-------------
+vim playbook1.yml
 
 
 ---
@@ -46,7 +54,28 @@ vim playbook.yml
         state: restarted
         enabled: yes
         
-// modify the playbook as asked in exam
+ ==========================================================================================
+Scenario-2
+-------------
+
+vim playbook2.yml
+
+ //playbook might already exists in exam you have to add handlers tasks
+- hosts:  all
+  become: true
+  tasks:
+    - copy:
+        content:  “hello world”
+        dest:  /tmp/abc.txt
+      notify:  restart_apache
+  handlers:
+    - name: restart apache
+      service: 
+        name:   httpd
+        state:  restarted
+        enabled: yes
+        
+// modify the playbook's as asked in exam
 
 
 
