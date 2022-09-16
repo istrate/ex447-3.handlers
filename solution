@@ -2,7 +2,7 @@
 2........
 configure web server
 
-clone git file
+clone git file https://github.com/rohitmeachu312/ex447-3.handlers.git
 
 install http-alias packages. 
 If its get installed then only restart the httpd service or
@@ -10,13 +10,16 @@ if the package is already installed dont start the httpd service
 
 Answer:
 =================
+git clone https://github.com/rohitmeachu312/ex447-3.handlers.git
+
+cd ex447-3.handlers.git/
 
 
-	#git clone <git url>
-	#cd web_install
-	#vim apache-setup.yml
-  
-  
+
+
+vim playbook.yml
+
+
 ---
 - name: example answer 
   hosts: node1.lab.example.com
@@ -43,8 +46,15 @@ Answer:
         state: restarted
         enabled: yes
         
-=======================================================================================        
- #ansible-playbook apache-setup.yml
- #git add .
- #git commit -m 'commit name'
- #git push
+// modify the playbook as asked in exam
+
+
+
+
+
+ansible-playbook apache-setup.yml       //Run playbook
+
+git add .
+git commit -m 'commit name'
+git push origin master
+cd ..
