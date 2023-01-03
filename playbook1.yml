@@ -1,8 +1,36 @@
 - hosts: web
   become: true
   tasks:
-  
+
+    - name: Install required packages
+      yum:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+
+    - name: Start and enable firewall
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+
+    - name: Open port 80
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+
     - name: Generate a basic homepage from jinja2 template
       template:
         src: alias.conf.j2
         dest: /var/www/html/index.html
+
