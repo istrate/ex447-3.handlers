@@ -1,9 +1,8 @@
-- hosts: all
+- hosts: web
   become: true
   tasks:
   
     - name: Generate a basic homepage from jinja2 template
-      copy:
-        src: alias.conf
+      template:
+        src: alias.conf.j2
         dest: /var/www/html/index.html
-        force: yes
