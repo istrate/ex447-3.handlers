@@ -31,6 +31,6 @@
 
     - name: Generate a basic homepage from jinja2 template
       template:
-        src: alias.conf.j2
+        src: alias.cfg.j2
         dest: /var/www/html/index.html
 
